@@ -74,7 +74,7 @@ button {
 .visual-frame {
   position: relative;
   overflow: hidden;
-  min-height: 440px;
+  aspect-ratio: 3 / 2;
   border: 1px solid var(--line);
   border-radius: 8px;
   background: #1b1614;
@@ -84,9 +84,8 @@ button {
 .result-image {
   width: 100%;
   height: 100%;
-  min-height: 440px;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
   filter: saturate(1.08) contrast(1.02);
 }
 
@@ -95,7 +94,7 @@ button {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, transparent 34%, rgba(14, 10, 8, 0.68) 100%),
+    linear-gradient(180deg, transparent 62%, rgba(14, 10, 8, 0.18) 100%),
     linear-gradient(90deg, rgba(11, 9, 7, 0.3), transparent 45%);
   pointer-events: none;
 }
@@ -180,7 +179,7 @@ button {
 .result-copy {
   position: relative;
   z-index: 3;
-  margin: -126px 28px 0;
+  margin: 18px 4px 0;
   max-width: 720px;
 }
 
@@ -198,9 +197,9 @@ button {
 
 h1 {
   margin: 0;
-  max-width: 11em;
-  font-size: clamp(2.1rem, 5.3vw, 5.4rem);
-  line-height: 0.98;
+  max-width: 13em;
+  font-size: clamp(2rem, 4.3vw, 4.5rem);
+  line-height: 1.03;
   letter-spacing: 0;
   text-wrap: balance;
 }
@@ -368,11 +367,6 @@ h1 {
     padding: 18px 0 24px;
   }
 
-  .visual-frame,
-  .result-image {
-    min-height: 390px;
-  }
-
   .control-panel {
     justify-content: flex-start;
   }
@@ -388,11 +382,6 @@ h1 {
     margin-bottom: 10px;
   }
 
-  .visual-frame,
-  .result-image {
-    min-height: 360px;
-  }
-
   .dice-tray {
     min-height: 114px;
     padding: 14px;
@@ -403,11 +392,11 @@ h1 {
   }
 
   .result-copy {
-    margin: -112px 14px 0;
+    margin: 14px 0 0;
   }
 
   h1 {
-    font-size: 2.55rem;
+    font-size: 2.15rem;
   }
 
   .rule-grid {
