@@ -7,6 +7,8 @@ const resultKicker = document.querySelector("#resultKicker");
 const resultTitle = document.querySelector("#resultTitle");
 const resultBody = document.querySelector("#resultBody");
 const historyList = document.querySelector("#historyList");
+const randomBuffer = new Uint32Array(1);
+const uint32Range = 0x100000000;
 
 const resultMap = {
   free: {
@@ -35,8 +37,29 @@ const resultMap = {
   },
 };
 
+function randomInt(maxExclusive) {
+  if (globalThis.crypto?.getRandomValues) {
+    const fairLimit = Math.floor(uint32Range / maxExclusive) * maxExclusive;
+    let value;
+
+    // Rejection sampling avoids modulo bias, keeping each die face equally likely.
+    do {
+      globalThis.crypto.getRandomValues(randomBuffer);
+      value = randomBuffer[0];
+    } while (value >= fairLimit);
+
+    return value % maxExclusive;
+  }
+
+  return Math.floor(Math.random() * maxExclusive);
+}
+
 function randomDie() {
-  return Math.floor(Math.random() * 6) + 1;
+  return randomInt(6) + 1;
+}
+
+function rollDice() {
+  return [randomDie(), randomDie()];
 }
 
 function getResult(first, second) {
@@ -66,7 +89,7 @@ function addHistory(first, second, result) {
   }
 }
 
-function applyResult(first, second) {
+function applyResult(first, second, options = {}) {
   const result = getResult(first, second);
   setDie(dieOne, first);
   setDie(dieTwo, second);
@@ -76,7 +99,10 @@ function applyResult(first, second) {
   resultKicker.textContent = result.kicker;
   resultTitle.textContent = result.title;
   resultBody.textContent = result.body;
-  addHistory(first, second, result);
+
+  if (options.recordHistory !== false) {
+    addHistory(first, second, result);
+  }
 }
 
 function roll() {
@@ -92,8 +118,7 @@ function roll() {
 
     if (ticks >= 8) {
       window.clearInterval(shuffle);
-      const first = randomDie();
-      const second = randomDie();
+      const [first, second] = rollDice();
       applyResult(first, second);
       dieOne.classList.remove("rolling");
       dieTwo.classList.remove("rolling");
@@ -103,4 +128,4 @@ function roll() {
 }
 
 rollButton.addEventListener("click", roll);
-applyResult(1, 1);
+applyResult(1, 1, { recordHistory: false });
