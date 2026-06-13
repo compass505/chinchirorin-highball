@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>チンチロリンハイボール占い</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="result-stage" aria-live="polite">
+        <div class="brand-row">
+          <span class="brand-mark" aria-hidden="true">◇</span>
+          <span>本日の一杯</span>
+        </div>
+
+        <div class="visual-frame">
+          <img
+            id="resultImage"
+            class="result-image"
+            src="./assets/free.png"
+            alt="ゾロ目のサイコロとハイボールが輝く居酒屋の幸運イラスト"
+          />
+          <div class="dice-tray" aria-label="サイコロの出目">
+            <div id="dieOne" class="die" data-value="1" aria-label="1">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+            <div id="dieTwo" class="die" data-value="1" aria-label="1">
+              <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="result-copy">
+          <p id="resultKicker" class="kicker">ゾロ目なら無料</p>
+          <h1 id="resultTitle">チンチロリンハイボール占い</h1>
+          <p id="resultBody">
+            サイコロを振って、今日のハイボール運を占います。
+          </p>
+        </div>
+      </section>
+
+      <aside class="control-panel">
+        <div class="meter">
+          <span>出目合計</span>
+          <strong id="sumValue">2</strong>
+        </div>
+
+        <button id="rollButton" class="roll-button" type="button">
+          <span class="button-icon" aria-hidden="true">⚂</span>
+          <span>サイコロを振る</span>
+        </button>
+
+        <div class="rule-grid" aria-label="チンチロリンハイボールのルール">
+          <div class="rule-card">
+            <span class="rule-token">同</span>
+            <strong>ゾロ目</strong>
+            <p>無料</p>
+          </div>
+          <div class="rule-card">
+            <span class="rule-token">偶</span>
+            <strong>偶数</strong>
+            <p>半額</p>
+          </div>
+          <div class="rule-card">
+            <span class="rule-token">奇</span>
+            <strong>奇数</strong>
+            <p>倍量倍額</p>
+          </div>
+        </div>
+
+        <ol id="historyList" class="history-list" aria-label="直近の結果"></ol>
+      </aside>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
